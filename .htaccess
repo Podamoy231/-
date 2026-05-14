@@ -1,0 +1,23 @@
+# AutoPilot — Apache конфигурация
+
+# Сессии PHP
+php_value session.name AUTOPILOT_SESS
+php_value session.cookie_path /
+php_value session.cookie_httponly 1
+php_value session.use_strict_mode 1
+php_value session.gc_maxlifetime 86400
+
+# Безопасность
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Запрет прямого доступа к includes/db.php
+<Files "db.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Главная страница
+DirectoryIndex index.html index.php
